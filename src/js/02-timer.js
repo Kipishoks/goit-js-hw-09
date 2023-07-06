@@ -46,7 +46,7 @@ function timeCounter() {
     timerMS -= 1000;
     const timerTime = convertMs(timerMS);
     const timer = addLeadingZero(timerTime);
-    console.log(timer);
+    // console.log(timer);
     daysTimer.textContent = timer.daysPad;
     hoursTimer.textContent = timer.hoursPad;
     minutesTimer.textContent = timer.minutesPad;

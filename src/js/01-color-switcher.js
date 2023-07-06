@@ -9,11 +9,11 @@ btnStop.addEventListener('click', stopColor);
 
 function changeColor() {
     if (isActive) {
-        console.log('Start');
+        // console.log('Start');
         isActive = false;
         btnStart.disabled = true;
         intervalID = setInterval((i) => { document.body.style.backgroundColor = (getRandomHexColor()) }, 1000);
-        console.log(intervalID);
+        // console.log(intervalID);
          } };
 
 

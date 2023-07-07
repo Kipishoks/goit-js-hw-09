@@ -18,7 +18,9 @@ function onSubmit(evt) {
          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
        });
      delay += Number(ref.step.value);
-  }
+  };
+
+  ref.reset();
 };
 
 

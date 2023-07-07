@@ -28,29 +28,44 @@ const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
-    minuteIncrement: 1,
-    // minDate: Date.now(),  //мінімальна дата сьогодні
-    onClose(selectedDates) {
-        const targetDate = selectedDates[0];
-        if (targetDate < currentDate) {
-            return (Notify.failure('Please choose a date in the future'));
-          }
-        btnStart.disabled = false;
-        timerMS = (targetDate - currentDate);
-         }
+  minuteIncrement: 1,
+
+   // minDate: Date.now(),  //мінімальна дата сьогодні
+  onClose(selectedDates) {
+    let targetDate = selectedDates[0];
+    if (targetDate < currentDate) {
+      btnStart.disabled = true;
+      selectedDates[0] = currentDate;
+      return (Notify.failure('Please choose a date in the future'));
+    }
+    btnStart.disabled = false;
+    timerMS = (targetDate - currentDate);
+  },
+    
+  // setDate(defaultDate) {
+  //   if (targetDate < currentDate) {
+  //     btnStart.disabled = true;
+  //   }
+  // }
 };
 
 flatpickr(inputData, options);
 
 function timeCounter() { 
-    timerMS -= 1000;
-    const timerTime = convertMs(timerMS);
-    const timer = addLeadingZero(timerTime);
+  timerMS -= 1000;
+  const timerTime = convertMs(timerMS);
+  const timer = addLeadingZero(timerTime);
+   
+  if (timerMS <= 0) {
+    clearInterval(timerId);
+    btnStart.disabled = true;
+  } else {
     // console.log(timer);
     daysTimer.textContent = timer.daysPad;
     hoursTimer.textContent = timer.hoursPad;
     minutesTimer.textContent = timer.minutesPad;
-    secondsTimer.textContent = timer.secondsPad;
+    secondsTimer.textContent = timer.secondsPad;}
+
 };
 
 function convertMs(ms) {
